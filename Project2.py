@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-from azure.core.credentials import AzureKeyCredential
 import tempfile
 
 # ===============================
