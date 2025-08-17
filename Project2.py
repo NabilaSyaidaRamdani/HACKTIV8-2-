@@ -7,7 +7,7 @@ from ultralytics import YOLO
 # ===============================
 # Setup Streamlit UI
 # ===============================
-st.title("🧴 Acne Detection & Skincare Recommendation using gpt-4o-mini")
+st.title("Acne Detection & Skincare Recommendation using gpt-4o-mini")
 st.write("Upload foto wajahmu untuk deteksi jerawat dan rekomendasi skincare dasar.")
 
 # Upload gambar
