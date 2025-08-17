@@ -2,6 +2,7 @@ import os
 import cv2
 import streamlit as st
 import tempfile
+import openai
 from ultralytics import YOLO
 
 # ===============================
@@ -14,15 +15,16 @@ st.write("Upload foto wajahmu untuk deteksi jerawat dan rekomendasi skincare das
 uploaded_file = st.file_uploader("Upload gambar", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Simpan file sementara
-    temp_file = tempfile.NamedTemporaryFile(delete=False)
+    # Simpan file sementara dengan ekstensi benar
+    suffix = "." + uploaded_file.name.split(".")[-1]
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     temp_file.write(uploaded_file.read())
     image_path = temp_file.name
 
     # ===============================
     # 1. Load YOLO Model
     # ===============================
-    yolo_model = YOLO("best.pt")  # Pastikan file best.pt sudah ada di folder project
+    yolo_model = YOLO("best.pt")  # Pastikan best.pt ada di project folder
     results = yolo_model(image_path)[0]
 
     # ===============================
@@ -52,7 +54,7 @@ if uploaded_file is not None:
     # 4. Hubungkan ke LLM untuk rekomendasi skincare
     # ===============================
     if summary_text:
-        openai.api_key = os.environ["GITHUB_TOKEN"]  # Token GitHub diset di Streamlit Secrets
+        openai.api_key = os.environ["GITHUB_TOKEN"]
         openai.base_url = "https://models.inference.ai.azure.com"
 
         prompt = f"""
