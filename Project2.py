@@ -53,7 +53,7 @@ if uploaded_file is not None:
     # 4. Hubungkan ke LLM untuk rekomendasi skincare
     # ===============================
     if summary_text:
-        openai.api_key = os.environ["github_pat_11A67J3OY0BaBrNx2t0A8P_O3xErnxZHUARep0t5w3bjHpM3zdQYsEN6CC4nGlHMwrFAKEXVX7gqNio6Nq"]
+        openai.api_key = os.environ["GITHUB_TOKEN"]
         openai.base_url = "https://models.inference.ai.azure.com"
 
         prompt = f"""
