@@ -1,9 +1,3 @@
-# 🌸 Acne Detection & Skincare Recommendation using YOLO & GPT
-
-Oke Nab, aku bikinkan draft **README.md** untuk project kamu biar jelas kalau di-upload ke GitHub atau Streamlit Cloud.
-Aku susun berdasarkan poin yang kamu minta:
-
----
 
 # 🌸 Acne Detection & Skincare Recommendation using YOLO & GPT
 
