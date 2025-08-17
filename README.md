@@ -67,3 +67,7 @@ https://hacktiv8.streamlit.app/
 
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/92422a9d-5734-4273-8dc5-e653e546418f" />
+
+
+<img width="435" height="770" alt="image" src="https://github.com/user-attachments/assets/d3d35127-e0cc-4b34-9d4f-61c90fd2bef9" />
+
