@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 import tempfile
+from ultralytics import YOLO
 
 # ===============================
 # Setup Streamlit UI
