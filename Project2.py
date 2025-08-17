@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-import matplotlib.pyplot as plt
 from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import UserMessage
 from azure.core.credentials import AzureKeyCredential
