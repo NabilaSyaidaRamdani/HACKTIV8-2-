@@ -53,7 +53,7 @@ if uploaded_file is not None:
     # 4. Hubungkan ke LLM untuk rekomendasi skincare
     # ===============================
     if summary_text:
-        openai.api_key = st.secrets["GITHUB_TOKEN"]
+        openai.api_key = st.secrets["GITHUB_TOKEN "]
         openai.base_url = "https://models.inference.ai.azure.com"
 
         prompt = f"""
