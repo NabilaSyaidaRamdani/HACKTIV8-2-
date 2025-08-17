@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-from ultralytics import YOLO
 import cv2
 import matplotlib.pyplot as plt
 from azure.ai.inference import ChatCompletionsClient
