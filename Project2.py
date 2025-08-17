@@ -2,7 +2,6 @@ import os
 import cv2
 import streamlit as st
 import tempfile
-import openai
 from ultralytics import YOLO
 
 # ===============================
