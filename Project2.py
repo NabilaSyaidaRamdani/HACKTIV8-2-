@@ -3,8 +3,6 @@ import cv2
 import streamlit as st
 import tempfile
 from ultralytics import YOLO
-import openai  # pastikan sudah diimport
-
 # ===============================
 # Setup Streamlit UI
 # ===============================
