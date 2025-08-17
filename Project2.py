@@ -1,7 +1,9 @@
 import os
+import cv2
+import numpy as np
 import streamlit as st
-import tempfile
 from ultralytics import YOLO
+from openai import OpenAI
 
 # ===============================
 # Setup Streamlit UI
@@ -13,16 +15,16 @@ st.write("Upload foto wajahmu untuk deteksi jerawat dan rekomendasi skincare das
 uploaded_file = st.file_uploader("Upload gambar", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Simpan file sementara
-    temp_file = tempfile.NamedTemporaryFile(delete=False)
-    temp_file.write(uploaded_file.read())
-    image_path = temp_file.name
-
     # ===============================
     # 1. Load YOLO Model
     # ===============================
-    yolo_model = YOLO("best.pt")  # ganti path modelmu
-    results = yolo_model(image_path)[0]
+    yolo_model = YOLO("best.pt")  # pastikan file best.pt ada di folder project
+    
+    # Baca file ke numpy array
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    img = cv2.imdecode(file_bytes, 1)
+    
+    results = yolo_model(img)[0]
 
     # ===============================
     # 2. Hitung jumlah jerawat
@@ -49,9 +51,10 @@ if uploaded_file is not None:
     # 4. Hubungkan ke LLM untuk rekomendasi skincare
     # ===============================
     if summary_text:
-        client = ChatCompletionsClient(
-            endpoint="https://models.github.ai/inference",
-            credential=AzureKeyCredential(os.environ["GITHUB_TOKEN"]),  # pastikan token GitHub sudah diset
+        # Koneksi ke GitHub Models pakai OpenAI client
+        client = OpenAI(
+            api_key=os.environ["GITHUB_TOKEN"],  # set di Streamlit Secrets
+            base_url="https://models.inference.ai.azure.com"
         )
 
         prompt = f"""
@@ -61,11 +64,11 @@ if uploaded_file is not None:
         Gunakan bahasa yang mudah dipahami.
         """
 
-        response = client.complete(
-            messages=[UserMessage(prompt)],
-            model="gpt-4o-mini",  # bisa ganti model lain kalau ada
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
             max_tokens=300,
         )
 
         st.subheader("💡 Rekomendasi Skincare")
-        st.write(response.choices[0].message.content)
+        st.write(response.choices[0].message["content"])
