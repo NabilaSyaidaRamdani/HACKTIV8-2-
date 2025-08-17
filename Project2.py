@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import streamlit as st
 from ultralytics import YOLO
-from openai import OpenAI
 
 # ===============================
 # Setup Streamlit UI
