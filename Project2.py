@@ -3,11 +3,26 @@ import cv2
 import streamlit as st
 import tempfile
 from ultralytics import YOLO
+import openai  # pastikan sudah diimport
 
 # ===============================
 # Setup Streamlit UI
 # ===============================
-st.title("Acne Detection & Skincare Recommendation using gpt-4o-mini")
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("bg.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.title("🌸 Acne Detection & Skincare Recommendation using gpt-4o-mini")
 st.write("Upload foto wajahmu untuk deteksi jerawat dan rekomendasi skincare dasar.")
 
 # Upload gambar
@@ -53,7 +68,7 @@ if uploaded_file is not None:
     # 4. Hubungkan ke LLM untuk rekomendasi skincare
     # ===============================
     if summary_text:
-        openai.api_key = st.secrets["GITHUB_TOKEN"]
+        openai.api_key = st.secrets["GITHUB_TOKEN"]  # pastikan key ada di Streamlit Secrets
         openai.base_url = "https://models.inference.ai.azure.com"
 
         prompt = f"""
